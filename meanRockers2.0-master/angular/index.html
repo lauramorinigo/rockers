@@ -1,0 +1,58 @@
+<!doctype html>
+
+
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>First Mean</title>
+	<!-- Cargamos bootstrap -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<!-- Cargamos angular -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<!-- Cargamos el javascript de angular -->
+	<script src="core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+	<div class="container">
+
+		<div class="jumbotron text-center" ng-prueba>
+			<h1>Cantidad de registrados rockeando: <span class="label label-success">{{ rockers.length }}</span></h1>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-1">
+				<table class="table table-striped">
+					<tr class="info">
+						<td>Nombre</td>
+						<td>Apellidos</td>
+						<td>Edad</td>
+					</tr>
+					<tr ng-repeat="rocker in rockers" ng-click="selectRocker(rocker)">
+						<td>{{ rocker.nombre }}</td>
+						<td>{{ rocker.apellido }}</td>
+						<td>{{ rocker.edad }}</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-sm-4 col-sm-offset-1 text-center">
+				<form name="myForm">
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newRocker.nombre" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Apellido" ng-model="newRocker.apellido" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Edad" ng-model="newRocker.edad" required>
+					</div>
+
+					<!-- Acciones que podemos realizar en el formulario -->
+					<button type="submit" class="btn btn-success btn-lg" ng-click="registrarRocker()" ng-disabled="myForm.$invalid || selected">Registrar</button>
+					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarRocker(newRocker)" ng-disabled="!newRocker.nombre || !newRocker.apellido || !newRocker.edad || !selected">Modificar</button>
+					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarRocker(newRocker)" ng-disabled="!newRocker.nombre || !newRocker.apellido || !newRocker.edad || !selected">Borrar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
